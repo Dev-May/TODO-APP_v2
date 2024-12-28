@@ -95,6 +95,8 @@ function displayTodos() {
     `;
   }
   document.querySelector(".task-container").innerHTML = c;
+
+  changeProgress();
 }
 
 async function deleteTodo(id) {
@@ -199,4 +201,19 @@ function showLoading() {
 
 function hideLoading() {
   loadingScreen.classList.add("d-none");
+}
+
+function changeProgress() {
+  const completedTaskNumber = allTodos.filter((todo) => todo.completed).length;
+  const totalTask = allTodos.length;
+  console.log(completedTaskNumber, totalTask);
+  console.log(completedTaskNumber / totalTask);
+
+  document.getElementById("progress").style.width = `${
+    (completedTaskNumber / totalTask) * 100
+  }%`;
+
+  const x = document.querySelectorAll(".status-number span");
+  x[0].innerHTML = completedTaskNumber;
+  x[1].innerHTML = totalTask;
 }
